@@ -47,6 +47,11 @@ public class GridP : MonoBehaviour
         SpawnTiles();
 
     }
+
+    public Node[,] GetNodeGrid()
+    {
+        return grid; 
+    }
     void SpawnTiles()
     {
         foreach (Node tileG in grid)
@@ -67,7 +72,21 @@ public class GridP : MonoBehaviour
         int x = Mathf.RoundToInt((worldGridSize.x - 1) * percentX);
         int y = Mathf.RoundToInt((worldGridSize.y - 1) * percentY);
 
+        
         return grid[x, y];
+    }
+
+    public void PrintNodeFromWorldPosition(Vector3 worldPos)
+    {
+        float percentX = (worldPos.x + (worldGridSize.x * sizeCell.x) / 2) / (worldGridSize.x * sizeCell.x);
+        float percentY = (worldPos.z + (worldGridSize.y * sizeCell.y) / 2) / (worldGridSize.y * sizeCell.y);
+        percentX = Mathf.Clamp01(percentX);
+        percentY = Mathf.Clamp01(percentY);
+
+        int x = Mathf.RoundToInt((worldGridSize.x - 1) * percentX);
+        int y = Mathf.RoundToInt((worldGridSize.y - 1) * percentY);
+
+        print("Node: [" + x + "," + y + "]");
     }
 
     private void OnDrawGizmos()
@@ -82,7 +101,8 @@ public class GridP : MonoBehaviour
 
                 if (GetNodeFromWorldPoint(worldPosition) == n)
                 {
-                    Gizmos.color = Color.cyan;
+                    //print("point: " + worldPosition);
+                    Gizmos.color = (n.isOccupied)? Color.red : Color.cyan;
                     Gizmos.DrawWireCube(n.worldPos+Vector3.up/2, new Vector3(sizeCell.x, 0.1f, sizeCell.y));
                 }
             }
