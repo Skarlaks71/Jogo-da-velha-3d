@@ -9,10 +9,10 @@ public class GridP : MonoBehaviour
     public Vector2 worldGridSize;
     public Vector2 sizeCell;
 
-    List<Node> tilesNodeList;
+    public List<Node> tilesNodeList;
     Node[,] grid;
 
-    private void Start()
+    private void Awake()
     {
         grid = new Node[(int)worldGridSize.x, (int)worldGridSize.y];
         tilesNodeList = new List<Node>();
@@ -38,7 +38,7 @@ public class GridP : MonoBehaviour
                 float posZ = y * sizeCell.y - (realGridSize.y - 2 * (sizeCell.y / 2)) / 2;
                 Vector3 tilePos = new Vector3(posX, .5f, posZ);
 
-                grid[x, y] = new Node(tilePos, false);
+                grid[x, y] = new Node(tilePos, new Vector2(x,y), false);
                 print("grid number = [" + x + "][" + y + "]");
                 tilesNodeList.Add(grid[x, y]);
             }
@@ -94,7 +94,7 @@ public class GridP : MonoBehaviour
         if (grid != null)
         {
             Vector3 mousePos = Input.mousePosition;
-            mousePos.z = 4;
+            mousePos.z = 6;
             Vector3 worldPosition = Camera.main.ScreenToWorldPoint(mousePos);
             foreach (Node n in tilesNodeList)
             {

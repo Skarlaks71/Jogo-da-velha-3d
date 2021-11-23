@@ -9,10 +9,18 @@ public class Player : MonoBehaviour
     
     int playerShape;
 
+    GameController gc;
     GridP grid;
+
+    public int PlayerShape
+    {
+        get { return playerShape; }
+        set { playerShape = value; }
+    }
 
     private void Awake()
     {
+        gc = GameObject.Find("GameController").GetComponent<GameController>();
         grid = GameObject.Find("grid").GetComponent<GridP>();
     }
 
@@ -22,12 +30,6 @@ public class Player : MonoBehaviour
         {
             SpawnObject();
         }
-    }
-
-    public int PlayerShape
-    {
-        get { return playerShape; }
-        set { playerShape = value; }
     }
 
     void SpawnObject()
@@ -46,13 +48,14 @@ public class Player : MonoBehaviour
             if (!selectNode.isOccupied)
             {
                 print("distance ray: " + hitData.distance);
-                Debug.DrawRay(ray.origin, ray.direction, Color.red, 999);
+                
                 print("Normal: " + hitData.normal);
                 print("Point: " + hitData.point);
                 grid.PrintNodeFromWorldPosition(hitData.point);
                 Instantiate(shapeDef, selectNode.worldPos+hitData.normal, Quaternion.identity);
                 selectNode.isOccupied = true;
                 selectNode.objectType = playerShape;
+                gc.FinishedMovement((int)selectNode.index.x, (int)selectNode.index.y, playerShape);
             }
                 
         }
