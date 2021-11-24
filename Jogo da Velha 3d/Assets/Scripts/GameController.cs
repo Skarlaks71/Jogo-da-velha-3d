@@ -144,12 +144,18 @@ public class GameController : MonoBehaviour
         Debug.Log("You Win!");
     }
 
+    IEnumerator WaitForMove(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        opponent.GetComponent<EnemyAi>().MakeAiTurn();
+    }
+
     void ChangePlayer(int shapePlayer)
     {
         if (shapePlayer == realPlayer)
         {
             player.SetActive(false);
-            opponent.GetComponent<EnemyAi>().MakeAiTurn();
+            StartCoroutine(WaitForMove(1.5f));
         }
         else
         {

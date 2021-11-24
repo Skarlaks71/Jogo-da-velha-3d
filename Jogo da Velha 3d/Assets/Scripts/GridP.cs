@@ -8,6 +8,7 @@ public class GridP : MonoBehaviour
     public Transform tile;
     public Vector2 worldGridSize;
     public Vector2 sizeCell;
+    public LayerMask gridLayer;
 
     public List<Node> tilesNodeList;
     Node[,] grid;
@@ -26,7 +27,7 @@ public class GridP : MonoBehaviour
             
         }
     }
-    void CreateGrid()
+    public void CreateGrid()
     {
         Vector2 realGridSize = worldGridSize * sizeCell;
 
@@ -95,16 +96,31 @@ public class GridP : MonoBehaviour
         {
             Vector3 mousePos = Input.mousePosition;
             mousePos.z = 6;
-            Vector3 worldPosition = Camera.main.ScreenToWorldPoint(mousePos);
+            Vector3 worldPosition = new Vector3();// = Camera.main.ScreenToWorldPoint(mousePos);
+            Ray ray;
+            RaycastHit hitInfo;
+
+            ray = Camera.main.ScreenPointToRay(mousePos);
+
+            bool isHit = Physics.Raycast(ray, out hitInfo, 1000, gridLayer);
+            if (isHit)
+            {
+                worldPosition = hitInfo.transform.position;
+            }
+            
+
             foreach (Node n in tilesNodeList)
             {
-
-                if (GetNodeFromWorldPoint(worldPosition) == n)
+                if (isHit)
                 {
-                    //print("point: " + worldPosition);
-                    Gizmos.color = (n.isOccupied)? Color.red : Color.cyan;
-                    Gizmos.DrawWireCube(n.worldPos+Vector3.up/2, new Vector3(sizeCell.x, 0.1f, sizeCell.y));
-                }
+                    if (GetNodeFromWorldPoint(worldPosition) == n)
+                    {
+                        //print("point: " + worldPosition);
+                        Gizmos.color = (n.isOccupied) ? Color.red : Color.cyan;
+                        Gizmos.DrawWireCube(n.worldPos + Vector3.up / 2, new Vector3(sizeCell.x, 0.1f, sizeCell.y));
+                    }
+                } 
+                                
             }
         }
     }
