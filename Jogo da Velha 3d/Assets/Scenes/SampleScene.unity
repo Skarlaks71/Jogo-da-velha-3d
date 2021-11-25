@@ -182,6 +182,7 @@ GameObject:
   - component: {fileID: 551308435}
   - component: {fileID: 551308434}
   - component: {fileID: 551308433}
+  - component: {fileID: 551308437}
   m_Layer: 6
   m_Name: ShapeCylinder
   m_TagString: Untagged
@@ -222,7 +223,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2ec156788fcee954ba02d584d9429434, type: 2}
+  - {fileID: 2100000, guid: d6eb995f75184da43b6e3488a6beaea3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -266,6 +267,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &551308437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 551308432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64ce4d35695798b45afb85b5c78d9561, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  noiseStrength: 0.25
+  objectHeight: 2.5
+  speed: 0.25
 --- !u!1 &875679023
 GameObject:
   m_ObjectHideFlags: 0
@@ -628,6 +644,7 @@ GameObject:
   - component: {fileID: 1699331989}
   - component: {fileID: 1699331988}
   - component: {fileID: 1699331987}
+  - component: {fileID: 1699331990}
   m_Layer: 6
   m_Name: ShapeSphere
   m_TagString: Untagged
@@ -681,7 +698,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2ec156788fcee954ba02d584d9429434, type: 2}
+  - {fileID: 2100000, guid: d6eb995f75184da43b6e3488a6beaea3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -711,6 +728,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1699331985}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1699331990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1699331985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64ce4d35695798b45afb85b5c78d9561, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  noiseStrength: 0.25
+  objectHeight: 100
+  speed: 0.25
 --- !u!1 &1900100308
 GameObject:
   m_ObjectHideFlags: 0
