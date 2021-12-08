@@ -46,8 +46,8 @@ public class EnemyAi : MonoBehaviour
         chooseTile = Random.Range(0, tileFreeList.Count);
         print("Choose: "+chooseTile);
         Node selectNode = tileFreeList[chooseTile];
-
-        Instantiate(shapeDef, selectNode.worldPos+Vector3.up, Quaternion.identity);
+        Vector3 pointPos = new Vector3(selectNode.worldPos.x, 1, selectNode.worldPos.z);
+        Instantiate(shapeDef, pointPos, Quaternion.identity);
 
         selectNode.isOccupied = true;
         selectNode.objectType = playerShape;

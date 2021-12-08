@@ -40,7 +40,7 @@ public class GridP : MonoBehaviour
                 Vector3 tilePos = new Vector3(posX, .5f, posZ);
 
                 grid[x, y] = new Node(tilePos, new Vector2(x,y), false);
-                print("grid number = [" + x + "][" + y + "]");
+                //print("grid number = [" + x + "][" + y + "]");
                 tilesNodeList.Add(grid[x, y]);
             }
         }
@@ -57,7 +57,7 @@ public class GridP : MonoBehaviour
     {
         foreach (Node tileG in grid)
         {
-            print(tileG.worldPos);
+            //print(tileG.worldPos);
             GameObject tileClone = (GameObject)Instantiate(tile.gameObject, tileG.worldPos, Quaternion.identity);
             tileClone.transform.parent = this.gameObject.transform;
         }
@@ -116,7 +116,7 @@ public class GridP : MonoBehaviour
                     if (GetNodeFromWorldPoint(worldPosition) == n)
                     {
                         //print("point: " + worldPosition);
-                        Gizmos.color = (n.isOccupied) ? Color.red : Color.cyan;
+                        Gizmos.color = (n.isOccupied) ? Color.red : Color.blue;
                         Gizmos.DrawWireCube(n.worldPos + Vector3.up / 2, new Vector3(sizeCell.x, 0.1f, sizeCell.y));
                     }
                 } 

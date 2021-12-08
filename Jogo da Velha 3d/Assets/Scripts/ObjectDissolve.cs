@@ -7,30 +7,42 @@ public class ObjectDissolve : MonoBehaviour
 {
     
     public float noiseStrength = 0.25f;
-    public float objectHeight = 1;
+    public float maxHeight = 3;
+    private float objectHeight = 0;
     public float speed = 0.25f;
-
-    Material mat;
+    public Color objectColor;
+    Material[] mats;
 
     private void Awake()
     {
-        mat = GetComponent<MeshRenderer>().material;
-
+        mats = GetComponent<Renderer>().materials;
+        foreach(var m in mats)
+        {
+            m.SetColor("BaseColor", objectColor);
+        }
+        
     }
 
     private void Start()
     {
-        StartCoroutine(animHeight(2.5f, 0.2f));
+        StartCoroutine(animHeight(maxHeight));
     }
 
-    IEnumerator animHeight(float maxHeight, float delay)
+    IEnumerator animHeight(float max)
     {
-        while(objectHeight < maxHeight)
-        {
-            mat.SetFloat("CutoffHeight",mat.GetFloat("CutofHeight")+0.1f);
-            yield return new WaitForSeconds(delay);
-        }
         
+        while(objectHeight < max)
+        {
+            
+            float valueM = speed * Time.deltaTime;
+            objectHeight += valueM;
+            foreach (var m in mats)
+            {
+                m.SetFloat("CutOffHeight", objectHeight);
+            }
+            yield return null;
+        }
+        yield return null;
     }
     
 

@@ -52,7 +52,8 @@ public class Player : MonoBehaviour
                 print("Normal: " + hitData.normal);
                 print("Point: " + hitData.point);
                 grid.PrintNodeFromWorldPosition(hitData.point);
-                Instantiate(shapeDef, selectNode.worldPos+hitData.normal, Quaternion.identity);
+                Vector3 pointPos = new Vector3(selectNode.worldPos.x, 1, selectNode.worldPos.z);
+                Instantiate(shapeDef, pointPos, Quaternion.identity);
                 selectNode.isOccupied = true;
                 selectNode.objectType = playerShape;
                 gc.FinishedMovement((int)selectNode.index.x, (int)selectNode.index.y, playerShape);
